@@ -25,9 +25,9 @@ def test_reraise_last(reraise):
     assert "foo" == "bar"
 
 
-# test_reraise_multiple_threads_first – abbreviation to prevent truncating in stdout
+# test_reraise_multiple_threads_first - abbreviation to prevent truncating in stdout
 def test_reraise_mtf(reraise):
-    def run(thread_id: int):
+    def run(thread_id):
         with reraise:
             assert thread_id == -1
 
@@ -39,9 +39,9 @@ def test_reraise_mtf(reraise):
     assert "foo" == "bar"
 
 
-# test_reraise_multiple_threads_last – abbreviation to prevent truncating in stdout
+# test_reraise_multiple_threads_last - abbreviation to prevent truncating in stdout
 def test_reraise_mtl(reraise):
-    def run(thread_id: int):
+    def run(thread_id):
         with reraise:
             assert thread_id == -1
 
