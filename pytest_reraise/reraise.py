@@ -1,11 +1,8 @@
 from threading import Lock
-from typing import Union
 
 import pytest
-from pytest import Item
 
-
-class Reraise:
+class Reraise(object):
     def __init__(self):
         self._catch = False
         self._origin = self
@@ -29,7 +26,7 @@ class Reraise:
             return self._origin._exception
 
     @exception.setter
-    def exception(self, e: Exception):
+    def exception(self, e):
         """
         Set the exception that this `Reraise` instance raises, if no exception has been
         captured or set yet.
@@ -51,7 +48,7 @@ class Reraise:
                 origin._exception = None
                 return e
 
-    def __call__(self, catch: bool = None) -> Union["Reraise", None]:
+    def __call__(self, catch=None):
         """
         If called without arguments, raises the first exception that has been captured
         by this `Reraise` context manager since the last call to `reraise()`. Note that
@@ -83,7 +80,7 @@ def reraise():
 
 
 @pytest.hookimpl(hookwrapper=True, tryfirst=True)
-def pytest_runtest_call(item: Item):
+def pytest_runtest_call(item):
     result = yield
     if "reraise" in item.funcargs:
         reraise = item.funcargs["reraise"]
